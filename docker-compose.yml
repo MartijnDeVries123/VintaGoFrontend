@@ -1,0 +1,10 @@
+services:
+  vintago-frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - HOST=0.0.0.0
+    command: ["npm", "run", "dev"]
