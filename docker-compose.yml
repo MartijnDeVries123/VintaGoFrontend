@@ -1,5 +1,8 @@
 services:
   vintago-frontend:
+    container_name: frontend
+    networks:
+      - backend-network
     build: .
     ports:
       - "3000:3000"
@@ -8,3 +11,7 @@ services:
     environment:
       - HOST=0.0.0.0
     command: ["sh", "-c", "npm install && npm run dev"]
+networks:
+  backend-network:
+    name: backend-network
+    external: true
