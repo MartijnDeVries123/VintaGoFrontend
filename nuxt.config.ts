@@ -5,6 +5,10 @@ export default defineNuxtConfig({
   devServer: {
     host: '0.0.0.0'
   },
+  css: [
+      'leaflet/dist/leaflet.css',
+    'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+  ],
   modules: [
     '@nuxtjs/tailwindcss',
   ],
