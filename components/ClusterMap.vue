@@ -2,7 +2,7 @@
   <l-map
       ref="mapRef"
       @ready="onMapReady"
-      style="height: 400px; width: 100%"
+      style="height: 600px; width: 100%"
       :zoom="7"
       :center="[52.09, 5.12]"
   >
@@ -10,9 +10,9 @@
     <l-circle-marker
         v-for="(p, idx) in points"
         :key="idx"
-        :lat-lng="p"
+        :lat-lng="[p.lat, p.lon]"
         :radius="8"
-        :color="getColor(labels[idx])"
+        :color="getColor(p.clusterId)"
     />
   </l-map>
 </template>
@@ -23,7 +23,6 @@ import { LMap, LTileLayer, LCircleMarker } from '@vue-leaflet/vue-leaflet'
 
 const props = defineProps({
   points: Array,
-  labels: Array
 })
 
 const mapRef = ref(null)
