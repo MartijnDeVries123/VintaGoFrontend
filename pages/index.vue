@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
@@ -21,6 +20,12 @@
           class="px-6 py-2 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-700 transition duration-200"
       >
         Ga naar de Artikelpagina
+      </NuxtLink>
+      <NuxtLink
+          to="/dbscan"
+          class="px-6 py-2 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-700 transition duration-200"
+      >
+        DBscan test
       </NuxtLink>
     </div>
   </div>
