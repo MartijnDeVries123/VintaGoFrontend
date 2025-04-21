@@ -27,7 +27,7 @@ function plotClusters() {
     mode: 'markers',
     marker: {
       size: 8,
-      color: props.points.map(p => p.clusterId >= 0 ? clusterColors[p.clusterId % clusterColors.length] : '#aaaaaa')
+      color: props.points.map(p => p.clusterId >= 0 ? clusterColors[p.clusterId % clusterColors.length] : '#000000')
     },
     type: 'scatter'
   }

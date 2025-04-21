@@ -39,6 +39,6 @@ const getColor = (label) => {
     '#9467bd', '#8c564b', '#e377c2', '#7f7f7f',
     '#bcbd22', '#17becf'
   ]
-  return label >= 0 ? clusterColors[label % clusterColors.length] : '#aaaaaa'
+  return label >= 0 ? clusterColors[label % clusterColors.length] : '#000000'
 }
 </script>
