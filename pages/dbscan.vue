@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-5xl mx-auto px-4">
+  <div class="max-w-screen-2xl mx-auto px-4">
     <h1 class="text-2xl mb-4">DBSCAN met Outlier Prioriteit</h1>
     <div class="mb-4">
       <button @click="runDBSCAN" class="bg-blue-500 text-white px-4 py-2 rounded">Start DBSCAN Loop</button>
@@ -19,14 +19,6 @@
 
   const labels = ref([])
   const scaledPoints = ref([])
-  const extraScaledPoints = ref([])
-
-  onMounted(() => {
-    scaledPoints.value = points.map(p => [p.lat, p.lon]);
-    labels.value = new Array(points.length).fill(-1)
-    extraScaledPoints.value = scaleLatLonTowardsDepot(points)
-  })
-
   const depot = { lat: 52.3778, lon: 4.8952 }
   const points = [
     { lat: 52.3778, lon: 4.8952, priority: 1 }, // Depot
@@ -37,6 +29,11 @@
 
   const outlierIndex = 3;
   const maxPriority = 100000000;
+
+  onMounted(() => {
+    scaledPoints.value = points.map(p => ({lat: p.lat, lon: p.lon, clusterId: -1}));
+    labels.value = new Array(points.length).fill(-1)
+  })
 
   function scaleLatLonTowardsDepot(data) {
     const alpha = 0.25;
@@ -54,10 +51,10 @@
 
     const loop = async () => {
       while (points[outlierIndex].priority < maxPriority) {
-        scaledPoints.value = scaleLatLonTowardsDepot(points)
+        const scaled = scaleLatLonTowardsDepot(points)
 
         const dbscan = new clustering.DBSCAN()
-        const clusters = dbscan.run(scaledPoints.value, 0.3, 2)
+        const clusters = dbscan.run(scaled, 0.3, 2)
 
         const tempLabels = new Array(points.length).fill(-1)
         clusters.forEach((cluster, i) => {
@@ -65,9 +62,14 @@
             tempLabels[idx] = i
           })
         })
-        labels.value = tempLabels
 
-        if (labels.value[outlierIndex] !== -1) break
+        scaledPoints.value = scaled.map((coords, i) => ({
+          lat: coords[0],
+          lon: coords[1],
+          clusterId: tempLabels[i]
+        }))
+
+        if (scaledPoints.value[outlierIndex].clusterId !== -1) break
 
         points[outlierIndex].priority += 1
         await new Promise(resolve => setTimeout(resolve, 1000))
