@@ -57,7 +57,7 @@ function showNextRoute() {
         <p class="mb-4"><strong>Datum:</strong> {{ new Date(routeData.date).toLocaleDateString() }}</p>
 
         <h2 class="text-2xl font-semibold mt-6 mb-2">Adressen</h2>
-        <ul class="space-y-4">
+        <ul class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
           <li
               v-for="(address, index) in routeData.addresses"
               :key="index"
