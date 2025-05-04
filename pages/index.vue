@@ -27,6 +27,12 @@
       >
         DBscan test
       </NuxtLink>
+      <NuxtLink
+          to="/sa"
+          class="px-6 py-2 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-700 transition duration-200"
+      >
+        Simmulated Annealing
+      </NuxtLink>
     </div>
   </div>
 </template>
