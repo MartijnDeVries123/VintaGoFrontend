@@ -15,11 +15,11 @@
         <tr v-for="(route, index) in paginatedRoutes" :key="index" class="hover:bg-gray-50">
           <td class="px-6 py-4 text-sm text-gray-700">
             <NuxtLink :to="`/routes/${route.id}`" class="text-blue-600 underline">
-              Bekijk details van {{ route.name }}
+              Bekijk details van route: #{{ route.id }}
             </NuxtLink>
           </td>
-          <td class="px-6 py-4 text-sm text-gray-700">{{ route.vehicle }}</td>
-          <td class="px-6 py-4 text-sm text-gray-700">{{ formatDate(route.date) }}</td>
+          <td class="px-6 py-4 text-sm text-gray-700">{{ route.deliveryTruckName }}</td>
+          <td class="px-6 py-4 text-sm text-gray-700">{{ formatDate(route.deliveryDate) }}</td>
         </tr>
         </tbody>
       </table>
@@ -42,24 +42,24 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import {useMockRoutes} from "~/composables/useMockRoutes.js";
-
-const routes = useMockRoutes()
 
 const currentPage = ref(1)
 const itemsPerPage = 15
 
-const totalPages = computed(() => Math.ceil(routes.length / itemsPerPage))
+const { data, pending, error } = await useFetch('/api/routes-schedule')
+const routes = computed(() => data.value ?? [])
+
+const totalPages = computed(() => Math.ceil(routes.value.length / itemsPerPage))
 
 const paginatedRoutes = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage
   const end = start + itemsPerPage
-  return routes.slice(start, end)
+  return routes.value.slice(start, end)
 })
 
 const formatDate = (date) => {
-  const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
-  return new Intl.DateTimeFormat('nl-NL', options).format(date)
+  const d = new Date(date)
+  return d.toLocaleDateString('nl-NL')
 }
 
 const nextPage = () => {
