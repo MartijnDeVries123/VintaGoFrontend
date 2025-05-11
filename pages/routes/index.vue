@@ -1,5 +1,14 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Navigatie -->
+    <div class="mt-8 flex justify-between">
+      <NuxtLink to="/" class="text-blue-600 hover:underline">
+        ← Terug naar dashboard
+      </NuxtLink>
+      <NuxtLink to="/routes/create" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        + Nieuwe routeplanning maken
+      </NuxtLink>
+    </div>
     <h1 class="text-3xl font-bold mb-6">Routeplanning voor Bezorging</h1>
 
     <div class="overflow-x-auto">
