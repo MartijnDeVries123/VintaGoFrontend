@@ -8,7 +8,7 @@
         <p class="mb-2"><strong>Bezorgwagen:</strong> {{ routeData.deliveryTruckName }}</p>
         <p class="mb-4"><strong>Datum:</strong> {{ new Date(routeData.deliveryDate).toLocaleDateString('nl-NL') }}</p>
 
-        <h2 class="text-2xl font-semibold mt-6 mb-2">Adressen</h2>
+        <h2 class="text-2xl font-semibold mt-6 mb-2">Adressen: <span>{{ addresses.length - 2}}</span></h2>
         <ul ref="addressList" class="space-y-4 max-h-[300px] overflow-y-auto pr-2">
           <li
               v-for="(step, index) in sortedSteps"
