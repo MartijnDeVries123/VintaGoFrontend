@@ -13,6 +13,18 @@
       >
         Ga naar de Planning
       </NuxtLink>
+      <NuxtLink
+          to="/orders"
+          class="px-6 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
+      >
+        Ga naar de Orders
+      </NuxtLink>
+      <NuxtLink
+          to="/simulation"
+          class="px-6 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition duration-200"
+      >
+        Simulatie omgeving opzetten
+      </NuxtLink>
     </div>
   </div>
 </template>

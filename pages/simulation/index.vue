@@ -1,6 +1,11 @@
 <template>
   <div class="p-8 max-w-md mx-auto space-y-6">
-    <h1 class="text-xl font-bold">Selecteer Simulation Type</h1>
+    <div class="mt-8 flex justify-between">
+      <NuxtLink to="/" class="text-blue-600 hover:underline">
+        ← Terug naar dashboard
+      </NuxtLink>
+    </div>
+    <h1 class="text-xl font-bold">Selecteer Simulatie</h1>
 
     <select
         v-model="selected"
